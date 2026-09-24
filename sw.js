@@ -1,5 +1,5 @@
 // 코드든 문제 JSON이든 바뀌면 APP_VERSION을 올린다(설계 §9)
-const APP_VERSION = '0.2.0';
+const APP_VERSION = '0.2.1';
 const CACHE = `hq-${APP_VERSION}`;
 const PRECACHE = [
   './',
