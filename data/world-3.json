@@ -1,0 +1,30 @@
+{
+  "world": 3,
+  "unit": "Ⅴ-2",
+  "title": "유럽의 산업화와 제국주의",
+  "stages": [
+    {
+      "id": "w3s1",
+      "kind": "normal",
+      "title": "산업 혁명의 배경·전개·확산",
+      "questions": []
+    },
+    {
+      "id": "w3s2",
+      "kind": "normal",
+      "title": "산업 혁명 이후 사회 변화·제국주의의 의미와 배경",
+      "questions": []
+    },
+    {
+      "id": "w3s3",
+      "kind": "normal",
+      "title": "서양 열강의 아프리카·아시아 침략",
+      "questions": []
+    },
+    {
+      "id": "w3boss",
+      "kind": "boss",
+      "title": "월드 3 보스"
+    }
+  ]
+}

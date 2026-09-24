@@ -1,0 +1,30 @@
+{
+  "world": 4,
+  "unit": "Ⅴ-3",
+  "title": "아시아의 국민 국가 건설 운동",
+  "stages": [
+    {
+      "id": "w4s1",
+      "kind": "normal",
+      "title": "중국이 국민 국가 수립을 추구하다",
+      "questions": []
+    },
+    {
+      "id": "w4s2",
+      "kind": "normal",
+      "title": "일본의 국민 국가 건설·인도의 민족 운동",
+      "questions": []
+    },
+    {
+      "id": "w4s3",
+      "kind": "normal",
+      "title": "동남아시아의 민족 운동·서아시아와 이집트",
+      "questions": []
+    },
+    {
+      "id": "w4boss",
+      "kind": "boss",
+      "title": "월드 4 보스"
+    }
+  ]
+}

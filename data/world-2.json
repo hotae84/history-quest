@@ -1,0 +1,30 @@
+{
+  "world": 2,
+  "unit": "Ⅴ-1",
+  "title": "유럽과 아메리카의 국민 국가 체제",
+  "stages": [
+    {
+      "id": "w2s1",
+      "kind": "normal",
+      "title": "미국 혁명과 프랑스 혁명",
+      "questions": []
+    },
+    {
+      "id": "w2s2",
+      "kind": "normal",
+      "title": "나폴레옹·빈 체제·7월 혁명과 2월 혁명·영국과 러시아의 개혁",
+      "questions": []
+    },
+    {
+      "id": "w2s3",
+      "kind": "normal",
+      "title": "이탈리아와 독일의 통일·남북 전쟁·라틴 아메리카",
+      "questions": []
+    },
+    {
+      "id": "w2boss",
+      "kind": "boss",
+      "title": "월드 2 보스"
+    }
+  ]
+}
