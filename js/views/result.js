@@ -1,5 +1,5 @@
 import { h } from '../dom.js';
-import { answerText, starsText, topbar } from './common.js';
+import { answerText, starsText, topbar, refText } from './common.js';
 
 export function renderResult(ctx) {
   const s = ctx.state.summary;
@@ -28,7 +28,7 @@ export function renderResult(ctx) {
               h('p', { class: 'wl-q' }, q.q),
               h('p', { class: 'wl-a' }, `정답: ${answerText(q)}`),
               h('p', { class: 'wl-e' }, q.explain),
-              h('p', { class: 'wl-ref' }, `📖 교과서 ${q.ref.replace('-', '~')}쪽`));
+              h('p', { class: 'wl-ref' }, refText(q.ref)));
           })))
       : null,
     h('div', { class: 'actions' },

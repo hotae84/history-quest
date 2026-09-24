@@ -1,5 +1,5 @@
 // 코드든 문제 JSON이든 바뀌면 APP_VERSION을 올린다(설계 §9)
-const APP_VERSION = '0.1.0';
+const APP_VERSION = '0.2.0';
 const CACHE = `hq-${APP_VERSION}`;
 const PRECACHE = [
   './',
@@ -62,7 +62,9 @@ self.addEventListener('fetch', (event) => {
   })());
 });
 
-const windowCount = async () => (await self.clients.matchAll({ type: 'window', includeUncontrolled: true })).length;
+// 이 앱 범위(scope)의 창만 센다(같은 github.io 출처의 다른 프로젝트 페이지 제외)
+const windowCount = async () => (await self.clients.matchAll({ type: 'window', includeUncontrolled: true }))
+  .filter((c) => c.url.startsWith(self.registration.scope)).length;
 
 self.addEventListener('message', (event) => {
   const type = event.data && event.data.type;
@@ -70,7 +72,13 @@ self.addEventListener('message', (event) => {
     event.waitUntil(windowCount().then((windows) => event.ports[0].postMessage({ windows })));
   }
   // 다른 창이 열려 있으면 활성화하지 않는다(풀이 중인 탭의 버전 혼재 방지)
-  if (type === 'SKIP_WAITING') event.waitUntil(windowCount().then((n) => { if (n <= 1) self.skipWaiting(); }));
+  if (type === 'SKIP_WAITING') {
+    event.waitUntil(windowCount().then((n) => {
+      const ok = n <= 1;
+      if (event.ports[0]) event.ports[0].postMessage({ ok, windows: n });
+      return ok ? self.skipWaiting() : undefined;
+    }));
+  }
   if (type === 'STATUS' && event.ports[0]) {
     event.waitUntil((async () => {
       const cache = await caches.open(CACHE);

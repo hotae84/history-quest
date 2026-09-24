@@ -74,7 +74,7 @@ function render() {
 
 // ---- 저장 ----
 function persist() {
-  if (state.readOnly) return false;
+  if (state.readOnly || state.fatal?.kind === 'conflict') return false;
   const r = store.save(state.data);
   if (r.ok) { state.data = r.data; return true; }
   if (r.reason === 'conflict') { enterConflict(); return false; }
@@ -304,9 +304,11 @@ async function boot() {
     render();
     return;
   }
+  // 콘텐츠를 불러오는 사이 다른 탭이 쓰기 권한을 가져갔다면 여기서 멈춘다(충돌 화면 유지)
+  if (state.fatal) { render(); return; }
   const n = normalizeWithContent(loaded.data, state.index);
   state.data = n.data;
-  state.readOnly = !!loaded.readOnly;
+  state.readOnly = state.readOnly || !!loaded.readOnly;
   if (loaded.readOnly) toast('기록을 옮기지 못해 읽기 전용으로 열었어요 — 설정에서 백업해 주세요');
   if (loaded.runDropped || n.runDropped) toast('진행 중이던 도전을 불러오지 못했어요');
 

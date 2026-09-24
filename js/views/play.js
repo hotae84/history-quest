@@ -1,6 +1,6 @@
 import { h } from '../dom.js';
 import { HINT_COST } from '../game.js';
-import { answerText, stageLabel } from './common.js';
+import { answerText, stageLabel, refText } from './common.js';
 import { renderChoice } from '../questions/choice.js';
 import { renderOx } from '../questions/ox.js';
 import { renderOrder } from '../questions/order.js';
@@ -47,7 +47,7 @@ export function renderPlay(ctx) {
     h('strong', {}, rec.correct ? '⭕ 정답!' : '❌ 아쉬워요'),
     rec.correct ? null : h('p', { class: 'feedback-answer' }, `정답: ${answerText(q)}`),
     h('p', { class: 'feedback-explain' }, q.explain),
-    h('p', { class: 'feedback-ref' }, `📖 교과서 ${q.ref.replace('-', '~')}쪽`));
+    h('p', { class: 'feedback-ref' }, refText(q.ref)));
 
   const hintBtn = q.type === 'mcq' && rec.answer === null && !rec.hint
     ? h('button', { class: 'btn ghost small', disabled: data.coins < HINT_COST, onclick: () => ctx.hint(qi) }, `💡 힌트 (🪙${HINT_COST})`)

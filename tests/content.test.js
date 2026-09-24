@@ -24,6 +24,10 @@ test('문제 형식 오류를 잡아냄', () => {
   eq(checkQuestion({ ...base, choices: ['a', 'b', 'c', 'd'], answer: 3 }), [], 'mcq 보기 4개는 허용');
   ok(checkQuestion({ ...base, choices: ['a', 'b', 'c'] }).length > 0, 'mcq 보기 3개');
   eq(checkQuestion({ ...base, ref: '122-123' }), [], 'ref 범위 허용');
+  eq(checkQuestion({ ...base, ref: '167,174' }), [], 'ref 여러 쪽 허용');
+  ok(checkQuestion({ ...base, ref: '167,' }).length > 0, 'ref 끝 쉼표');
+  ok(checkQuestion({ ...base, explain: '②는 콜럼버스이다.' }).length > 0, '섞이는 보기의 번호를 해설에 쓰면 오류');
+  eq(checkQuestion({ ...base, fixedOrder: true, explain: '①이 정답이다.' }), [], '고정 순서면 번호 허용');
   for (const bad of [undefined, 122, '', '122쪽', '12-']) ok(checkQuestion({ ...base, ref: bad }).length > 0, `ref ${bad}`);
   eq(checkQuestion({ ...base, passage: '자료 내용\n둘째 줄', passageLabel: '자료', fixedOrder: true }), [], 'passage·fixedOrder 허용');
   ok(checkQuestion({ ...base, passage: 'x'.repeat(601) }).length > 0, 'passage 600자 초과');

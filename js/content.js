@@ -16,7 +16,7 @@ export function checkQuestion(q) {
   if (!TYPES.includes(q.type)) e.push(`${w}: 알 수 없는 type`);
   if (!nonEmpty(q.q)) e.push(`${w}: q 필요`);
   if (!nonEmpty(q.explain)) e.push(`${w}: explain 필요`);
-  if (typeof q.ref !== 'string' || !/^\d{1,3}(-\d{1,3})?$/.test(q.ref)) e.push(`${w}: ref(교과서 쪽, 예: "122" 또는 "122-123") 필요`);
+  if (typeof q.ref !== 'string' || !/^\d{1,3}(-\d{1,3})?(,\d{1,3}(-\d{1,3})?)*$/.test(q.ref)) e.push(`${w}: ref(교과서 쪽, 예: "122", "122-123", "167,174") 필요`);
   switch (q.type) {
     case 'mcq':
     case 'blank': {
@@ -38,6 +38,8 @@ export function checkQuestion(q) {
           !unique(q.pairs.map((p) => p[0])) || !unique(q.pairs.map((p) => p[1]))) e.push(`${w}: match 쌍 2~5개(중복 없음)`);
       break;
   }
+  // 보기를 섞는 문항의 해설은 보기 번호(①~⑤)로 가리키면 화면 번호와 어긋난다
+  if (typeof q.explain === 'string' && /[①②③④⑤]/.test(q.explain) && !((q.type === 'mcq' && q.fixedOrder) || q.type === 'ox')) e.push(`${w}: 해설에 보기 번호(①~⑤)를 쓰지 말 것 — 보기가 섞여 번호가 달라짐`);
   // 선다형 전용 필드(설계 v7 §4·§7.1)
   if (q.type === 'mcq') {
     if (q.passage !== undefined && (!nonEmpty(q.passage) || q.passage.length > 600)) e.push(`${w}: passage는 1~600자`);

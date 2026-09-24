@@ -24,6 +24,11 @@ export function answerText(q) {
   }
 }
 
+// 교과서 쪽 표시: "122-123" → "122~123", "167,174" → "167, 174"
+export function refText(ref) {
+  return `📖 교과서 ${ref.replace(/-/g, '~').replace(/,/g, ', ')}쪽`;
+}
+
 export function stageLabel(index, stageId) {
   return index.stages.get(stageId)?.title ?? '여러 스테이지';
 }

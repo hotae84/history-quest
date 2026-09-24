@@ -55,7 +55,11 @@ export async function applyUpdate(ctx, { skipSave = false } = {}) {
     if (ctx.state.data && !ctx.persistNow()) { ctx.toast('저장하지 못해 업데이트를 멈췄어요'); return; }
   }
   updateRequested = true;
-  reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+  const ch = new MessageChannel();
+  ch.port1.onmessage = (e) => {
+    if (!e.data?.ok) { updateRequested = false; ctx.toast('다른 탭을 닫은 뒤 다시 눌러 주세요'); }
+  };
+  reg.waiting.postMessage({ type: 'SKIP_WAITING' }, [ch.port2]);
 }
 
 export function swStatus() {

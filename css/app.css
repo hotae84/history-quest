@@ -100,12 +100,11 @@ h2 { font-size: 1.1rem; margin: 0 0 10px; }
 .passage-body { white-space: pre-line; font-size: 1.05rem; line-height: 1.75; }
 .neg { text-decoration: underline; text-underline-offset: 3px; }
 .choice-text { line-height: 1.55; }
-.choice { align-items: flex-start; }
 .choice-no { margin-top: 1px; }
 .done-callout { margin-bottom: 12px; padding: 10px 14px; border-radius: 12px; background: var(--primary-soft); font-weight: 700; }
 .choices { display: grid; gap: 10px; }
 .choices.blank { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-.choice { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 12px 14px; border: 2px solid var(--line);
+.choice { display: flex; align-items: flex-start; gap: 12px; min-height: 56px; padding: 12px 14px; border: 2px solid var(--line);
   border-radius: 14px; background: var(--card); font-size: 1.05rem; text-align: left; }
 .choice-no { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--primary-soft); font-weight: 800; }
 .choice.removed { opacity: .3; text-decoration: line-through; }
